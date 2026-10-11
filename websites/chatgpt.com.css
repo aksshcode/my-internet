@@ -15,7 +15,7 @@
   --cgpt-glass-panel: light-dark(rgba(255, 255, 255, 0.45), rgba(15, 15, 18, 0.38)) !important;
   --cgpt-glass-panel-strong: light-dark(rgba(255, 255, 255, 0.82), rgba(10, 10, 12, 0.82)) !important;
   --cgpt-glass-menu: light-dark(rgba(255, 255, 255, 0.95), rgba(17, 17, 17, 0.93)) !important;
-  --cgpt-sidebar-glass: light-dark(rgba(235, 239, 246, 0.92), rgba(16, 16, 24, 0.92)) !important;
+  --cgpt-sidebar-glass: light-dark(rgba(255, 255, 255, 0.15), rgba(15, 17, 23, 0.35)) !important;
   --cgpt-border: light-dark(rgba(15, 23, 42, 0.13), rgba(255, 255, 255, 0.13)) !important;
   --cgpt-border-strong: light-dark(rgba(15, 23, 42, 0.18), rgba(255, 255, 255, 0.18)) !important;
   --cgpt-hover: light-dark(rgba(15, 23, 42, 0.055), rgba(255, 255, 255, 0.07)) !important;
@@ -75,7 +75,9 @@ main,
 #stage-sidebar-tiny-bar,
 .stage-sidebar-pure-surface,
 nav[aria-label="Sidebar"],
-nav[aria-label="Chat history"] {
+nav[aria-label="Chat history"],
+[data-testid="sidebar-container"],
+div[class*="sidebar"] {
   position: sticky !important;
   z-index: 30 !important;
   background: transparent !important;
@@ -380,9 +382,11 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 #thread-bottom-container > div,
 #thread-bottom > div,
 div:has(> form[data-type="unified-composer"]),
+div:has(form[data-type="unified-composer"]),
 div[class*="bg-gradient-to-t"],
 div[class*="from-token-main-surface"],
-div[class*="from-token-bg-primary"] {
+div[class*="from-token-bg-primary"],
+div[class*="bg-token-main-surface"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -406,18 +410,15 @@ div:has(> form[data-type="unified-composer"])::after {
 /* cgpt-composer-surface $ Creates the main frosted glass composer */
 #thread-bottom-container [data-composer-surface="true"],
 form[data-type="unified-composer"] [data-composer-surface="true"],
-form[data-type="unified-composer"] {
-  background:
-    linear-gradient(to bottom, light-dark(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)), light-dark(rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.1))), var(--cgpt-glass-panel-strong) !important;
-  background-color: var(--cgpt-glass-panel-strong) !important;
-  backdrop-filter: blur(100px) saturate(120%) !important;
-  -webkit-backdrop-filter: blur(100px) saturate(120%) !important;
+form[data-type="unified-composer"],
+form[data-type="unified-composer"] > div {
+  background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
+  backdrop-filter: blur(30px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(130%) !important;
   border: 1px solid light-dark(rgba(15, 23, 42, 0.13), rgba(255, 255, 255, 0.16)) !important;
   border-radius: 28px !important;
-  box-shadow:
-    0 0 30px rgba(0, 0, 0, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
 }
 /* cgpt-composer-editable $ Keeps composer text areas transparent */
 .wcDTda_prosemirror-parent,
