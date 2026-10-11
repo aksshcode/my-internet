@@ -1,5 +1,10 @@
 /* cgpt-transparency $ Clears ChatGPT surfaces so the wallpaper can bleed through */
-:root {
+:root,
+.dark,
+html.dark,
+[data-theme="dark"],
+[data-theme="light"],
+body {
   color-scheme: light dark !important;
   --main-surface-background: transparent !important;
   --main-surface-primary: transparent !important;
@@ -7,7 +12,15 @@
   --sidebar-surface-primary: transparent !important;
   --sidebar-surface-secondary: transparent !important;
   --sidebar-surface-tertiary: transparent !important;
+  --main-surface-tertiary: transparent !important;
   --message-surface: transparent !important;
+  --composer-surface-primary: transparent !important;
+  --bg-primary: transparent !important;
+  --bg-secondary: transparent !important;
+  --bg-tertiary: transparent !important;
+  --bg-elevated-primary: transparent !important;
+  --bg-elevated-secondary: transparent !important;
+  --bg-scrim: transparent !important;
   --cgpt-glass-text-primary: light-dark(#0f172a, #f8fafc) !important;
   --cgpt-glass-text-secondary: light-dark(#334155, #cbd5e1) !important;
   --cgpt-glass-text-muted: light-dark(#64748b, #94a3b8) !important;
@@ -69,15 +82,7 @@ main,
 /* cgpt-sidebar-base $ Keeps the main sidebar shell transparent */
 .sticky.top-0.z-30,
 #stage-sidebar .sticky.top-0.z-30,
-#stage-slideover-sidebar .sticky.top-0.z-30,
-#stage-slideover-sidebar,
-#stage-sidebar,
-#stage-sidebar-tiny-bar,
-.stage-sidebar-pure-surface,
-nav[aria-label="Sidebar"],
-nav[aria-label="Chat history"],
-[data-testid="sidebar-container"],
-div[class*="sidebar"] {
+#stage-slideover-sidebar .sticky.top-0.z-30 {
   position: sticky !important;
   z-index: 30 !important;
   background: transparent !important;
@@ -89,6 +94,27 @@ div[class*="sidebar"] {
   box-shadow: none !important;
   margin-inline: 0 !important;
   width: 100% !important;
+}
+#stage-slideover-sidebar,
+#stage-sidebar,
+#stage-sidebar-tiny-bar,
+.stage-sidebar-pure-surface,
+nav[aria-label="Sidebar"],
+nav[aria-label="Chat history"],
+[data-testid="sidebar-container"],
+div[class*="sidebar"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#stage-sidebar-tiny-bar *,
+#stage-sidebar *,
+#stage-slideover-sidebar * {
+  background-color: transparent !important;
 }
 /* cgpt-sidebar-pseudo $ Removes decorative sidebar pseudo-elements */
 .sticky.top-0.z-30::before,
@@ -381,37 +407,58 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 #thread-bottom,
 #thread-bottom-container > div,
 #thread-bottom > div,
+.bg-thread--footer,
+[class*="threadFooter"],
+[class*="threadFooterContentFade"],
+[class*="threadFooterExtendedContentFade"],
+[class*="threadFooterBelowComposerFade"],
 div:has(> form[data-type="unified-composer"]),
 div:has(form[data-type="unified-composer"]),
 div[class*="bg-gradient-to-t"],
 div[class*="from-token-main-surface"],
 div[class*="from-token-bg-primary"],
-div[class*="bg-token-main-surface"] {
+div[class*="bg-token-main-surface"],
+div[class*="bg-token-bg-primary"],
+div[class*="bg-token-bg-elevated-primary"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
+}
+#thread-bottom-container *,
+#thread-bottom * {
+  background-image: none !important;
 }
 /* cgpt-composer-pseudo $ Removes decorative composer pseudo-elements */
 #thread-bottom-container::before,
 #thread-bottom-container::after,
 #thread-bottom::before,
 #thread-bottom::after,
+.bg-thread--footer::before,
+.bg-thread--footer::after,
+[class*="threadFooter"]::before,
+[class*="threadFooter"]::after,
+[class*="threadFooterContentFade"]::after,
+[class*="threadFooterExtendedContentFade"]::after,
+[class*="threadFooterBelowComposerFade"]::after,
 div:has(> form[data-type="unified-composer"])::before,
 div:has(> form[data-type="unified-composer"])::after {
   content: none !important;
   display: none !important;
   opacity: 0 !important;
+  background: none !important;
 }
 /* cgpt-composer-fade $ Adds a subtle bottom fade behind the composer */
 #thread-bottom-container {
-  background: linear-gradient(to top, light-dark(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.34)), transparent) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 /* cgpt-composer-surface $ Creates the main frosted glass composer */
 #thread-bottom-container [data-composer-surface="true"],
 form[data-type="unified-composer"] [data-composer-surface="true"],
 form[data-type="unified-composer"],
-form[data-type="unified-composer"] > div {
+div[class*="corner-superellipse"] {
   background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
   background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
   backdrop-filter: blur(30px) saturate(130%) !important;
@@ -419,6 +466,12 @@ form[data-type="unified-composer"] > div {
   border: 1px solid light-dark(rgba(15, 23, 42, 0.13), rgba(255, 255, 255, 0.16)) !important;
   border-radius: 28px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+}
+form[data-type="unified-composer"] > div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 /* cgpt-composer-editable $ Keeps composer text areas transparent */
 .wcDTda_prosemirror-parent,
