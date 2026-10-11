@@ -457,7 +457,7 @@ div:has(> form[data-type="unified-composer"])::after {
 /* cgpt-composer-surface $ Creates the main frosted glass composer */
 #thread-bottom-container [data-composer-surface="true"],
 form[data-type="unified-composer"] [data-composer-surface="true"],
-form[data-type="unified-composer"],
+[data-composer-surface="true"],
 div[class*="corner-superellipse"] {
   background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
   background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
@@ -467,7 +467,14 @@ div[class*="corner-superellipse"] {
   border-radius: 28px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
 }
-form[data-type="unified-composer"] > div {
+form[data-type="unified-composer"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+form[data-type="unified-composer"] > div,
+[data-composer-surface="true"] > div {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
