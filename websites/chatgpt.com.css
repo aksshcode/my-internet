@@ -45,14 +45,6 @@ main,
   background: transparent !important;
   background-color: transparent !important;
 }
-
-/* NUCLEAR RED TEST */
-body {
-  border: 20px solid red !important;
-}
-#stage-sidebar, #stage-slideover-sidebar, .sticky.top-0.z-30 {
-  background: rgba(255, 0, 0, 0.7) !important;
-}
 /* cgpt-main-surfaces $ Removes opaque surface fills while preserving page structure */
 .bg-token-main-surface-primary,
 .bg-token-main-surface-secondary,
