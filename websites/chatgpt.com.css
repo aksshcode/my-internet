@@ -58,7 +58,13 @@ main,
 .bg-token-sidebar-surface-tertiary,
 .bg-token-message-surface,
 .bg-surface-primary,
-.bg-\(--sidebar-surface-primary\) {
+.bg-\(--sidebar-surface-primary\),
+#stage-slideover-sidebar,
+#stage-sidebar,
+#stage-sidebar-tiny-bar,
+.stage-sidebar-pure-surface,
+nav[aria-label="Sidebar"],
+nav[aria-label="Chat history"] {
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -69,7 +75,13 @@ main,
 /* cgpt-sidebar-base $ Keeps the main sidebar shell transparent */
 .sticky.top-0.z-30,
 #stage-sidebar .sticky.top-0.z-30,
-#stage-slideover-sidebar .sticky.top-0.z-30 {
+#stage-slideover-sidebar .sticky.top-0.z-30,
+#stage-slideover-sidebar,
+#stage-sidebar,
+#stage-sidebar-tiny-bar,
+.stage-sidebar-pure-surface,
+nav[aria-label="Sidebar"],
+nav[aria-label="Chat history"] {
   position: sticky !important;
   z-index: 30 !important;
   background: transparent !important;
@@ -372,17 +384,24 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 #thread-bottom-container,
 #thread-bottom,
 #thread-bottom-container > div,
-#thread-bottom > div {
+#thread-bottom > div,
+div:has(> form[data-type="unified-composer"]),
+div[class*="bg-gradient-to-t"],
+div[class*="from-token-main-surface"],
+div[class*="from-token-bg-primary"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
+  border: none !important;
 }
 /* cgpt-composer-pseudo $ Removes decorative composer pseudo-elements */
 #thread-bottom-container::before,
 #thread-bottom-container::after,
 #thread-bottom::before,
-#thread-bottom::after {
+#thread-bottom::after,
+div:has(> form[data-type="unified-composer"])::before,
+div:has(> form[data-type="unified-composer"])::after {
   content: none !important;
   display: none !important;
   opacity: 0 !important;
@@ -393,16 +412,17 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 }
 /* cgpt-composer-surface $ Creates the main frosted glass composer */
 #thread-bottom-container [data-composer-surface="true"],
-form[data-type="unified-composer"] [data-composer-surface="true"] {
+form[data-type="unified-composer"] [data-composer-surface="true"],
+form[data-type="unified-composer"] {
   background:
     linear-gradient(to bottom, light-dark(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)), light-dark(rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.1))), var(--cgpt-glass-panel-strong) !important;
   background-color: var(--cgpt-glass-panel-strong) !important;
   backdrop-filter: blur(100px) saturate(120%) !important;
   -webkit-backdrop-filter: blur(100px) saturate(120%) !important;
-  border: 1px solid light-dark(rgba(15, 23, 42, 0.13), rgba(255, 255, 255, 0.16)) !important;
+  border: 4px solid #ff0033 !important;
   border-radius: 28px !important;
   box-shadow:
-    0 0 30px rgba(0, 0, 0, 0.32),
+    0 0 35px rgba(255, 0, 51, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
     inset 0 0 0 1px rgba(255, 255, 255, 0.035) !important;
 }
