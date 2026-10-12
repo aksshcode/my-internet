@@ -534,24 +534,25 @@ form[data-type="unified-composer"] > div,
   border: none !important;
   box-shadow: none !important;
 }
-/* cgpt-composer-banners $ Styles upload limit, warnings and header banners as frosted glass */
-[data-prompt-textarea-header],
-[data-prompt-textarea-header] > div,
+/* cgpt-composer-banners $ Hides upload limit notices, warnings, Try Plus buttons, and header banners */
+[data-prompt-textarea-header]:not(:has([data-testid*="attachment"])):not(:has(img)),
 [data-composer-bar-placement="header"],
 [data-work-composer-chin="true"],
-[data-voice-composer-hint] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-[data-prompt-textarea-header] div[class*="border"],
-[data-prompt-textarea-header] div[class*="rounded"],
-div:has(> button[aria-label="Close"]) {
-  background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.55)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.55)) !important;
-  backdrop-filter: blur(24px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(130%) !important;
-  border: 1px solid light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.16)) !important;
-  border-radius: 18px !important;
+[data-voice-composer-hint],
+#thread-bottom-container > div:not(:has(form)):not(:has([data-composer-surface="true"])),
+div:has(> form[data-type="unified-composer"]) > div:not(:has(form)):not(:has([data-composer-surface="true"])),
+#thread-bottom-container [role="alert"],
+form[data-type="unified-composer"] [role="alert"],
+div:has(> button[aria-label="Close"]):has([class*="text-"]),
+div:has(> button[aria-label="Dismiss"]):has([class*="text-"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
 /* cgpt-composer-editable $ Keeps composer text areas transparent */
 .wcDTda_prosemirror-parent,
@@ -1079,11 +1080,61 @@ div[class*="sticky top-0"]:not(:has(form[data-type="unified-composer"])) a[href=
 
 #composer-plus-btn,
 [data-composer-surface="true"] #composer-plus-btn,
-form[data-type="unified-composer"] button {
+form[data-type="unified-composer"] button:not([data-testid*="upgrade" i]):not([data-testid*="plus" i]):not([data-testid*="try-plus" i]):not([aria-label*="Upgrade" i]):not([aria-label*="Plus" i]):not(:has(svg[class*="sparkle" i])):not(:has(svg.text-token-text-accent)) {
   display: inline-flex !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
 }
+
+/* cgpt-hide-usage-limit-and-upsell $ Hides rate limits, Try Plus free button, and upsell banners */
+[data-prompt-textarea-header]:not(:has([data-testid*="attachment"])):not(:has(img)),
+[data-composer-bar-placement="header"],
+[data-work-composer-chin="true"],
+[data-voice-composer-hint],
+#thread-bottom-container > div:not(:has(form)):not(:has([data-composer-surface="true"])),
+div:has(> form[data-type="unified-composer"]) > div:not(:has(form)):not(:has([data-composer-surface="true"])),
+#thread-bottom-container [role="alert"],
+form[data-type="unified-composer"] [role="alert"],
+#thread-bottom-container div:has(button:has(svg[class*="sparkle" i])),
+#thread-bottom-container div:has(button[aria-label*="Plus" i]),
+#thread-bottom-container div:has(button[aria-label*="Upgrade" i]),
+#thread-bottom-container div:has(a[href*="/buy" i]),
+#thread-bottom-container div:has(a[href*="/pricing" i]),
+#thread-bottom-container div:has(a[href*="/upgrade" i]),
+div:has(> button[aria-label="Close"]):has([class*="text-"]),
+div:has(> button[aria-label="Dismiss"]):has([class*="text-"]),
+[data-testid*="usage-limit" i],
+[data-testid*="rate-limit" i],
+[data-testid*="limit-banner" i],
+[data-testid*="model-cap" i],
+[data-testid*="cap-disclaimer" i],
+[data-testid*="attachment-limit" i],
+button[data-testid*="upgrade" i],
+button[data-testid*="plus" i]:not(#composer-plus-btn),
+button[data-testid*="try-plus" i],
+button[aria-label*="Plus" i]:not(#composer-plus-btn),
+button[aria-label*="Upgrade" i],
+a[href*="/buy" i],
+a[href*="/pricing" i],
+a[href*="/plus" i],
+a[href*="/upgrade" i],
+button:has(svg.text-token-text-accent),
+button:has(svg[class*="sparkle" i]),
+button:has(svg[data-icon*="sparkle" i]),
+form[data-type="unified-composer"] button:has(svg[class*="sparkle" i]),
+form[data-type="unified-composer"] button:has(svg.text-token-text-accent),
+form[data-type="unified-composer"] button[aria-label*="Plus" i]:not(#composer-plus-btn),
+form[data-type="unified-composer"] button[aria-label*="Upgrade" i] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
 
 
