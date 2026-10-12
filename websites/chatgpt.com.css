@@ -493,20 +493,33 @@ div:has(> form[data-type="unified-composer"])::after {
   background-color: transparent !important;
   background-image: none !important;
 }
-/* cgpt-composer-surface $ Creates the main frosted glass composer */
+/* cgpt-composer-surface $ Creates the transparent high-contrast frosted glass composer */
 #thread-bottom-container [data-composer-surface="true"],
 form[data-type="unified-composer"] [data-composer-surface="true"],
 [data-composer-surface="true"],
 div[class*="corner-superellipse"] {
-  background: light-dark(rgba(255, 255, 255, 0.75), rgba(16, 20, 28, 0.72)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.75), rgba(16, 20, 28, 0.72)) !important;
-  backdrop-filter: blur(40px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(150%) !important;
-  border: 1px solid light-dark(rgba(15, 23, 42, 0.16), rgba(255, 255, 255, 0.18)) !important;
+  background: light-dark(rgba(255, 255, 255, 0.45), rgba(14, 18, 26, 0.35)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(14, 18, 26, 0.35)) !important;
+  backdrop-filter: blur(36px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(140%) !important;
+  border: 1px solid light-dark(rgba(15, 23, 42, 0.18), rgba(255, 255, 255, 0.22)) !important;
   border-radius: 28px !important;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#thread-bottom-container [data-composer-surface="true"]:focus-within,
+form[data-type="unified-composer"] [data-composer-surface="true"]:focus-within,
+[data-composer-surface="true"]:focus-within,
+div[class*="corner-superellipse"]:focus-within {
+  background: light-dark(rgba(255, 255, 255, 0.65), rgba(14, 18, 26, 0.52)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.65), rgba(14, 18, 26, 0.52)) !important;
+  border-color: light-dark(rgba(15, 23, 42, 0.3), rgba(255, 255, 255, 0.35)) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
 }
 form[data-type="unified-composer"] {
   background: transparent !important;
@@ -560,11 +573,15 @@ form[data-type="unified-composer"] [role="textbox"],
   background-color: transparent !important;
   color: light-dark(#020617, #ffffff) !important;
   caret-color: light-dark(#020617, #ffffff) !important;
+  font-weight: 450 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85) !important;
 }
 /* cgpt-composer-placeholder $ Improves placeholder readability */
 [data-composer-surface="true"] .ProseMirror p.placeholder::before,
-[data-composer-surface="true"] .ProseMirror [data-placeholder]::before {
-  color: light-dark(rgba(15, 23, 42, 0.55), rgba(248, 250, 252, 0.48)) !important;
+[data-composer-surface="true"] .ProseMirror [data-placeholder]::before,
+#prompt-textarea::placeholder {
+  color: light-dark(rgba(15, 23, 42, 0.6), rgba(248, 250, 252, 0.72)) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75) !important;
 }
 /* cgpt-composer-controls $ Adds the shared glass treatment to composer controls */
 form[data-type="unified-composer"] .composer-btn,
@@ -1032,3 +1049,29 @@ button.flex.h-6.w-6.items-center.justify-center.rounded-full.border.border-token
 [data-testid="thread-disclaimer"] {
   display: none !important;
 }
+
+/* cgpt-hide-top-buttons $ Hides all action buttons and controls at the top */
+#page-header,
+#page-header button,
+#page-header a,
+header button,
+header a[href="/"],
+div[class*="sticky top-0"]:not([class*="composer"]) button,
+div[class*="sticky top-0"]:not([class*="composer"]) a[href="/"],
+[data-testid="share-chat-button"],
+[data-testid="conversation-options-button"],
+[data-testid="create-new-chat-button"],
+[data-testid="open-sidebar-button"],
+[data-testid="close-sidebar-button"],
+button[aria-label="New chat"],
+button[aria-label="Open sidebar"],
+button[aria-label="Close sidebar"],
+button[aria-label*="sidebar" i],
+button[aria-label*="Share" i],
+button[aria-label*="More" i] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
