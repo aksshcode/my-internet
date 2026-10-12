@@ -88,7 +88,7 @@ main,
 [data-testid="thread-disclaimer"] > div > div > div > div {
   background-color: transparent !important;
 }
-/* cgpt-sidebar-base $ Styles the sidebar and rail with frosted glass */
+/* cgpt-sidebar-base $ Keeps the sidebar and rail completely transparent */
 .sticky.top-0.z-30,
 #stage-sidebar .sticky.top-0.z-30,
 #stage-slideover-sidebar .sticky.top-0.z-30 {
@@ -105,45 +105,50 @@ main,
   width: 100% !important;
 }
 aside,
+aside *,
 #stage-slideover-sidebar,
 #stage-sidebar,
+#stage-sidebar-tiny-bar,
 .stage-sidebar-pure-surface,
+nav[aria-label="Sidebar"],
+nav[aria-label="Chat history"],
 [data-testid="sidebar-container"],
-div:has(> #stage-sidebar-tiny-bar),
-div:has(> nav#stage-sidebar-tiny-bar),
-div:has(#stage-sidebar-tiny-bar),
+[data-testid*="sidebar"],
+[data-testid="stage-sidebar-tiny-bar"],
+div[class*="sidebar"],
+*:has(> #stage-sidebar-tiny-bar),
+*:has(> nav#stage-sidebar-tiny-bar),
+*:has(#stage-sidebar-tiny-bar),
 div[class*="sidebar-rail"],
 div[class*="w-(--sidebar-rail-width)"],
 *[class*="w-(--sidebar-rail-width)"],
 div.z-21:has(#stage-sidebar-tiny-bar),
-div.z-21 {
-  background: light-dark(rgba(255, 255, 255, 0.2), rgba(15, 17, 23, 0.38)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.2), rgba(15, 17, 23, 0.38)) !important;
+div.z-21,
+div[class*="z-21"] {
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
-  backdrop-filter: blur(30px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(30px) saturate(140%) !important;
-  border-right: 1px solid light-dark(rgba(15, 23, 42, 0.1), rgba(255, 255, 255, 0.1)) !important;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
-#stage-sidebar-tiny-bar,
-nav[aria-label="Sidebar"],
-nav[aria-label="Chat history"],
-[data-testid="stage-sidebar-tiny-bar"],
 #stage-sidebar-tiny-bar *,
 #stage-sidebar *,
 #stage-slideover-sidebar *,
 aside *,
 [data-testid*="sidebar"] *,
-div:has(> #stage-sidebar-tiny-bar) > *,
-div[class*="w-(--sidebar-rail-width)"] > * {
+div:has(> #stage-sidebar-tiny-bar) *,
+div[class*="w-(--sidebar-rail-width)"] *,
+*[class*="w-(--sidebar-rail-width)"] * {
   background-color: transparent !important;
 }
 #stage-sidebar-tiny-bar button:hover,
 #stage-sidebar-tiny-bar a:hover,
 div[class*="w-(--sidebar-rail-width)"] button:hover,
 div[class*="w-(--sidebar-rail-width)"] a:hover {
-  background: light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12)) !important;
+  background: light-dark(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)) !important;
   border-radius: 10px !important;
 }
 /* cgpt-sidebar-pseudo $ Removes decorative sidebar pseudo-elements */
@@ -493,13 +498,15 @@ div:has(> form[data-type="unified-composer"])::after {
 form[data-type="unified-composer"] [data-composer-surface="true"],
 [data-composer-surface="true"],
 div[class*="corner-superellipse"] {
-  background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.45)) !important;
-  backdrop-filter: blur(30px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(30px) saturate(130%) !important;
-  border: 1px solid light-dark(rgba(15, 23, 42, 0.13), rgba(255, 255, 255, 0.16)) !important;
+  background: light-dark(rgba(255, 255, 255, 0.75), rgba(16, 20, 28, 0.72)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.75), rgba(16, 20, 28, 0.72)) !important;
+  backdrop-filter: blur(40px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(150%) !important;
+  border: 1px solid light-dark(rgba(15, 23, 42, 0.16), rgba(255, 255, 255, 0.18)) !important;
   border-radius: 28px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 form[data-type="unified-composer"] {
   background: transparent !important;
@@ -551,8 +558,8 @@ form[data-type="unified-composer"] [role="textbox"],
 [data-composer-surface="true"] [contenteditable="true"] {
   background: transparent !important;
   background-color: transparent !important;
-  color: var(--cgpt-glass-text-primary) !important;
-  caret-color: light-dark(#0f172a, #ffffff) !important;
+  color: light-dark(#020617, #ffffff) !important;
+  caret-color: light-dark(#020617, #ffffff) !important;
 }
 /* cgpt-composer-placeholder $ Improves placeholder readability */
 [data-composer-surface="true"] .ProseMirror p.placeholder::before,
