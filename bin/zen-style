@@ -22,17 +22,25 @@ function build() {
   console.log("🔨 Building styles.json...");
   run("node update-styles-json.mjs");
   
-  // Sync userContent.css if chatgpt.com.css exists
-  const chatgptCss = path.join(websitesDir, "chatgpt.com.css");
-  if (fs.existsSync(chatgptCss)) {
-    const css = fs.readFileSync(chatgptCss, "utf-8");
-    const content = `/* Zen Browser userContent.css */\n@-moz-document domain("chatgpt.com"), domain("chat.openai.com") {\n${css}\n}\n`;
-    try {
-      fs.writeFileSync(userContentPath, content);
-      console.log("✅ Synced userContent.css");
-    } catch (e) {
-      console.warn("⚠️ Could not sync userContent.css:", e.message);
+  // Sync userContent.css for local fallback/instant override
+  let userContent = "/* Zen Browser userContent.css auto-generated */\n";
+  const customSites = [
+    { file: "chatgpt.com.css", domains: ['domain("chatgpt.com")', 'domain("chat.openai.com")'] },
+    { file: "youtube.com.css", domains: ['domain("youtube.com")', 'domain("www.youtube.com")'] },
+    { file: "music.youtube.com.css", domains: ['domain("music.youtube.com")'] }
+  ];
+  for (const site of customSites) {
+    const filePath = path.join(websitesDir, site.file);
+    if (fs.existsSync(filePath)) {
+      const css = fs.readFileSync(filePath, "utf-8");
+      userContent += `@-moz-document ${site.domains.join(", ")} {\n${css}\n}\n\n`;
     }
+  }
+  try {
+    fs.writeFileSync(userContentPath, userContent);
+    console.log("✅ Synced userContent.css with custom stylesheets");
+  } catch (e) {
+    console.warn("⚠️ Could not sync userContent.css:", e.message);
   }
   console.log("✨ Build complete.");
 }
