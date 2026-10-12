@@ -498,15 +498,15 @@ div:has(> form[data-type="unified-composer"])::after {
 form[data-type="unified-composer"] [data-composer-surface="true"],
 [data-composer-surface="true"],
 div[class*="corner-superellipse"] {
-  background: light-dark(rgba(255, 255, 255, 0.45), rgba(14, 18, 26, 0.35)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(14, 18, 26, 0.35)) !important;
-  backdrop-filter: blur(36px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(36px) saturate(140%) !important;
+  background: light-dark(rgba(255, 255, 255, 0.25), rgba(12, 16, 24, 0.16)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.25), rgba(12, 16, 24, 0.16)) !important;
+  backdrop-filter: blur(28px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(130%) !important;
   border: 1px solid light-dark(rgba(15, 23, 42, 0.18), rgba(255, 255, 255, 0.22)) !important;
   border-radius: 28px !important;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
@@ -514,12 +514,12 @@ div[class*="corner-superellipse"] {
 form[data-type="unified-composer"] [data-composer-surface="true"]:focus-within,
 [data-composer-surface="true"]:focus-within,
 div[class*="corner-superellipse"]:focus-within {
-  background: light-dark(rgba(255, 255, 255, 0.65), rgba(14, 18, 26, 0.52)) !important;
-  background-color: light-dark(rgba(255, 255, 255, 0.65), rgba(14, 18, 26, 0.52)) !important;
-  border-color: light-dark(rgba(15, 23, 42, 0.3), rgba(255, 255, 255, 0.35)) !important;
+  background: light-dark(rgba(255, 255, 255, 0.45), rgba(12, 16, 24, 0.32)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(12, 16, 24, 0.32)) !important;
+  border-color: light-dark(rgba(15, 23, 42, 0.3), rgba(255, 255, 255, 0.38)) !important;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
 }
 form[data-type="unified-composer"] {
   background: transparent !important;
@@ -1050,28 +1050,40 @@ button.flex.h-6.w-6.items-center.justify-center.rounded-full.border.border-token
   display: none !important;
 }
 
-/* cgpt-hide-top-buttons $ Hides all action buttons and controls at the top */
-#page-header,
+/* cgpt-hide-top-buttons $ Hides all action buttons at the top header while preserving breathing space */
+#page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 48px !important;
+  pointer-events: none !important;
+}
+
 #page-header button,
 #page-header a,
 header button,
 header a[href="/"],
-div[class*="sticky top-0"]:not([class*="composer"]) button,
-div[class*="sticky top-0"]:not([class*="composer"]) a[href="/"],
-[data-testid="share-chat-button"],
-[data-testid="conversation-options-button"],
-[data-testid="create-new-chat-button"],
-[data-testid="open-sidebar-button"],
-[data-testid="close-sidebar-button"],
-button[aria-label="New chat"],
-button[aria-label="Open sidebar"],
-button[aria-label="Close sidebar"],
-button[aria-label*="sidebar" i],
-button[aria-label*="Share" i],
-button[aria-label*="More" i] {
+div[class*="sticky top-0"]:not(:has(form[data-type="unified-composer"])) button,
+div[class*="sticky top-0"]:not(:has(form[data-type="unified-composer"])) a[href="/"],
+#page-header [data-testid="share-chat-button"],
+#page-header [data-testid="conversation-options-button"],
+#page-header [data-testid="create-new-chat-button"],
+#page-header [data-testid="open-sidebar-button"],
+#page-header [data-testid="close-sidebar-button"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+#composer-plus-btn,
+[data-composer-surface="true"] #composer-plus-btn,
+form[data-type="unified-composer"] button {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 
