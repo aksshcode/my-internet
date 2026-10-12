@@ -480,6 +480,25 @@ form[data-type="unified-composer"] > div,
   border: none !important;
   box-shadow: none !important;
 }
+/* cgpt-composer-banners $ Styles upload limit, warnings and header banners as frosted glass */
+[data-prompt-textarea-header],
+[data-prompt-textarea-header] > div,
+[data-composer-bar-placement="header"],
+[data-work-composer-chin="true"],
+[data-voice-composer-hint] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+[data-prompt-textarea-header] div[class*="border"],
+[data-prompt-textarea-header] div[class*="rounded"],
+div:has(> button[aria-label="Close"]) {
+  background: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.55)) !important;
+  background-color: light-dark(rgba(255, 255, 255, 0.45), rgba(25, 28, 35, 0.55)) !important;
+  backdrop-filter: blur(24px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(130%) !important;
+  border: 1px solid light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.16)) !important;
+  border-radius: 18px !important;
+}
 /* cgpt-composer-editable $ Keeps composer text areas transparent */
 .wcDTda_prosemirror-parent,
 .vertical-scroll-fade-mask {
