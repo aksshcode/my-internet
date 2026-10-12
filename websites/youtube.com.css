@@ -1,9 +1,35 @@
 /* yt-Transparency */
+:root,
+html[dark],
+[dark] {
+  --yt-spec-base-background: transparent !important;
+  --yt-spec-raised-background: rgba(255, 255, 255, 0.05) !important;
+  --yt-spec-menu-background: rgba(18, 20, 26, 0.85) !important;
+  --yt-spec-static-brand-black: transparent !important;
+  --yt-spec-general-background-a: transparent !important;
+  --yt-spec-general-background-b: transparent !important;
+}
+
 html[dark],
 html,
 body,
-#container.ytd-searchbox,
 ytd-app,
+#page-manager,
+ytd-browse,
+ytd-watch-flexy,
+#columns,
+#primary,
+#secondary,
+#content,
+#player-container-outer,
+#player-container-inner,
+ytd-rich-grid-renderer,
+ytd-rich-item-renderer,
+ytd-item-section-renderer,
+#contents,
+#primary-inner,
+#secondary-inner,
+#container.ytd-searchbox,
 #page-header-container,
 #page-header,
 #tabs-container,
@@ -41,7 +67,7 @@ tp-yt-app-drawer > #contentContainer,
 #guide-content,
 ytd-mini-guide-renderer,
 ytd-mini-guide-entry-renderer {
-  background-color: #00000000 !important;
+  background-color: transparent !important;
   background: none !important;
 }
 
@@ -54,7 +80,7 @@ ytd-mini-guide-entry-renderer {
   mask-size: cover !important;
 }
 
-/* yt-Toggle side guide $ Completely remove the side guide */
+/* yt-Toggle side guide $ Clean side guide without black bars */
 ytd-mini-guide-renderer,
 [theater=""] #contentContainer::after {
   display: none !important;
@@ -63,15 +89,15 @@ tp-yt-app-drawer > #contentContainer:not([opened=""]),
 #contentContainer:not([opened=""]) #guide-content,
 ytd-mini-guide-renderer,
 ytd-mini-guide-entry-renderer {
-  background-color: var(--yt-spec-text-primary-inverse) !important;
-  background: var(--yt-spec-text-primary-inverse) !important;
+  background-color: transparent !important;
+  background: transparent !important;
 }
 #content:not(:has(#contentContainer[opened=""])) #page-manager {
   margin-left: 0 !important;
 }
 
 ytd-app:not([guide-persistent-and-visible=""]) tp-yt-app-drawer > #contentContainer {
-  background-color: var(--yt-spec-text-primary-inverse) !important;
+  background-color: transparent !important;
 }
 
 ytd-alert-with-button-renderer {
@@ -152,16 +178,31 @@ ytd-two-column-browse-results-renderer[page-subtype="playlist"] {
   width: fit-content !important;
 }
 
-/* yt-Transparent header */
-#masthead-container {
-  #background.ytd-masthead {
-    background-color: #00000000 !important;
-  }
+/* yt-Transparent header $ Frosted glass header bar and search box */
+#masthead-container,
+ytd-masthead,
+#background.ytd-masthead {
+  background: rgba(12, 14, 20, 0.45) !important;
+  background-color: rgba(12, 14, 20, 0.45) !important;
+  backdrop-filter: blur(28px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(140%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+#container.ytd-searchbox,
+.ytSearchboxComponentInputBox {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 9999px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 .ytSearchboxComponentSearchButton {
-  background-color: var(--yt-spec-text-primary-inverse) !important;
-  color: var(--yt-live-chat-text-input-field-placeholder-color) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  border-radius: 0 9999px 9999px 0 !important;
 }
 
 /* yt-no voice search */
@@ -263,18 +304,50 @@ ytd-merch-shelf-renderer,
   display: none !important;
 }
 
-/* yt-Transparent video background */
+/* yt-Transparent video background $ Transparent player wrapper with fullscreen protection */
 .html5-main-video,
 .html5-video-container,
-#movie_player,
-#container,
 #ytd-player,
 #player-container,
 #player-full-bleed-container,
 #full-bleed-container,
 ytlr-player {
-  background-color: #00000000 !important;
+  background-color: transparent !important;
   background: transparent !important;
+}
+
+:fullscreen #movie_player,
+:-moz-full-screen #movie_player,
+[fullscreen=""] #movie_player {
+  background-color: #000000 !important;
+}
+
+/* yt-Watch page frosted cards $ Frosted glass cards for description, metadata and actions */
+#description.ytd-watch-metadata,
+#description-inner {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(24px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(130%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+#actions.ytd-watch-metadata button,
+ytd-menu-renderer ytd-button-renderer yt-button-shape button,
+#subscribe-button yt-button-shape button,
+ytd-subscribe-button-renderer button {
+  backdrop-filter: blur(16px) !important;
+  border-radius: 9999px !important;
+}
+
+ytd-comment-thread-renderer {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 14px !important;
+  padding: 10px !important;
+  margin-bottom: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 #cinematics {
