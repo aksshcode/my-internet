@@ -1,8 +1,13 @@
 /* cgpt-transparency $ Clears ChatGPT surfaces so the wallpaper can bleed through */
 :root,
+*,
+*::before,
+*::after,
 .dark,
+.dark *,
 html.dark,
 [data-theme="dark"],
+[data-theme="dark"] *,
 [data-theme="light"],
 body {
   color-scheme: light dark !important;
@@ -71,13 +76,17 @@ main,
 .bg-token-sidebar-surface-tertiary,
 .bg-token-message-surface,
 .bg-surface-primary,
-.bg-\(--sidebar-surface-primary\) {
+.bg-\(--sidebar-surface-primary\),
+[class*="bg-token-main-surface"],
+[class*="bg-token-sidebar-surface"],
+[class*="bg-token-bg-primary"],
+[class*="bg-token-bg-elevated"] {
   background: transparent !important;
   background-color: transparent !important;
 }
 /* cgpt-disclaimer $ Restores the thread disclaimer readability */
 [data-testid="thread-disclaimer"] > div > div > div > div {
-  background-color: light-dark(#fff, #000) !important;
+  background-color: transparent !important;
 }
 /* cgpt-sidebar-base $ Keeps the main sidebar shell transparent */
 .sticky.top-0.z-30,
@@ -102,7 +111,14 @@ main,
 nav[aria-label="Sidebar"],
 nav[aria-label="Chat history"],
 [data-testid="sidebar-container"],
-div[class*="sidebar"] {
+div[class*="sidebar"],
+div:has(> #stage-sidebar-tiny-bar),
+div:has(> nav#stage-sidebar-tiny-bar),
+div:has(#stage-sidebar-tiny-bar),
+div[class*="sidebar-rail"],
+div[class*="w-(--sidebar-rail-width)"],
+div.z-21,
+div[class*="z-21"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -113,7 +129,9 @@ div[class*="sidebar"] {
 }
 #stage-sidebar-tiny-bar *,
 #stage-sidebar *,
-#stage-slideover-sidebar * {
+#stage-slideover-sidebar *,
+div:has(> #stage-sidebar-tiny-bar) *,
+div[class*="w-(--sidebar-rail-width)"] * {
   background-color: transparent !important;
 }
 /* cgpt-sidebar-pseudo $ Removes decorative sidebar pseudo-elements */
@@ -407,6 +425,8 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 #thread-bottom,
 #thread-bottom-container > div,
 #thread-bottom > div,
+#thread-bottom-container div:not([data-composer-surface="true"]):not([data-composer-surface="true"] *):not([data-prompt-textarea-header]):not([data-prompt-textarea-header] *),
+#thread-bottom div:not([data-composer-surface="true"]):not([data-composer-surface="true"] *):not([data-prompt-textarea-header]):not([data-prompt-textarea-header] *),
 .bg-thread--footer,
 [class*="threadFooter"],
 [class*="threadFooterContentFade"],
@@ -414,6 +434,8 @@ div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"] [dat
 [class*="threadFooterBelowComposerFade"],
 div:has(> form[data-type="unified-composer"]),
 div:has(form[data-type="unified-composer"]),
+div[class*="bottom-0"],
+div[class*="sticky"][class*="bottom-0"],
 div[class*="bg-gradient-to-t"],
 div[class*="from-token-main-surface"],
 div[class*="from-token-bg-primary"],
