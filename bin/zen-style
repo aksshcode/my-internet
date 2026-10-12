@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+
+import fs from "fs";
+import path from "path";
+import { execSync } from "child_process";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const repoRoot = path.resolve(__dirname, "..");
+const websitesDir = path.join(repoRoot, "websites");
+const userContentPath = "/home/akssh/.config/zen/f7ngu58s.Default (release)/chrome/userContent.css";
+
+const command = process.argv[2] || "help";
+const arg = process.argv.slice(3).join(" ");
+
+function run(cmd, cwd = repoRoot) {
+  return execSync(cmd, { cwd, encoding: "utf-8" }).trim();
+}
+
+function build() {
+  console.log("🔨 Building styles.json...");
+  run("node update-styles-json.mjs");
+  
+  // Sync userContent.css if chatgpt.com.css exists
+  const chatgptCss = path.join(websitesDir, "chatgpt.com.css");
+  if (fs.existsSync(chatgptCss)) {
+    const css = fs.readFileSync(chatgptCss, "utf-8");
+    const content = `/* Zen Browser userContent.css */\n@-moz-document domain("chatgpt.com"), domain("chat.openai.com") {\n${css}\n}\n`;
+    try {
+      fs.writeFileSync(userContentPath, content);
+      console.log("✅ Synced userContent.css");
+    } catch (e) {
+      console.warn("⚠️ Could not sync userContent.css:", e.message);
+    }
+  }
+  console.log("✨ Build complete.");
+}
+
+function push(msg) {
+  build();
+  const commitMsg = msg || "style: update website styles";
+  console.log(`📦 Committing: "${commitMsg}"...`);
+  run("git add -A");
+  
+  const status = run("git status --porcelain");
+  if (!status) {
+    console.log("ℹ️ No changes to commit.");
+  } else {
+    run(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
+    console.log("🚀 Pushing to origin-user main...");
+    run("git push origin-user main");
+  }
+  
+  const commitSha = run("git rev-parse --short HEAD");
+  const fullSha = run("git rev-parse HEAD");
+  console.log("\n=======================================================");
+  console.log(`🎉 Deployed commit: ${commitSha} (${fullSha})`);
+  console.log(`🔗 Extension Raw URL:\nhttps://raw.githubusercontent.com/aksshcode/my-internet/${commitSha}/styles.json`);
+  console.log(`🔗 Main Branch URL:\nhttps://raw.githubusercontent.com/aksshcode/my-internet/main/styles.json`);
+  console.log("=======================================================\n");
+}
+
+function status() {
+  const commitSha = run("git rev-parse --short HEAD");
+  const gitStatus = run("git status -s");
+  const cssCount = fs.readdirSync(websitesDir).filter(f => f.endsWith(".css")).length;
+  console.log(`📁 Repo: ${repoRoot}`);
+  console.log(`📌 Head: ${commitSha}`);
+  console.log(`🎨 Styled Websites: ${cssCount}`);
+  console.log(`📊 Working tree:\n${gitStatus || "Clean"}`);
+}
+
+function inspectSite(site) {
+  if (!site) {
+    console.error("Please specify a site domain (e.g. chatgpt.com)");
+    process.exit(1);
+  }
+  const cleanSite = site.endsWith(".css") ? site : `${site}.css`;
+  const filePath = path.join(websitesDir, cleanSite);
+  if (!fs.existsSync(filePath)) {
+    console.error(`❌ File not found: ${filePath}`);
+    process.exit(1);
+  }
+  const content = fs.readFileSync(filePath, "utf-8");
+  const features = (content.match(/\/\* [^$]+ \$ [^*]+ \*\//g) || []);
+  console.log(`🎨 Site: ${cleanSite} (${features.length} features defined)`);
+  features.forEach((f, idx) => console.log(`  ${idx + 1}. ${f}`));
+}
+
+switch (command) {
+  case "build":
+    build();
+    break;
+  case "push":
+    push(arg);
+    break;
+  case "status":
+    status();
+    break;
+  case "inspect":
+    inspectSite(arg);
+    break;
+  default:
+    console.log(`zen-style CLI - Manage Zen Internet styles & deployment
+
+Usage:
+  zen-style build                 Recompile styles.json and sync userContent.css
+  zen-style push [commit-message] Build, commit, push, and print fetch URLs
+  zen-style status                Check repo status and commit info
+  zen-style inspect <domain>      List features declared in a website CSS file
+`);
+    break;
+}
