@@ -1047,8 +1047,20 @@ button.flex.h-6.w-6.items-center.justify-center.rounded-full.border.border-token
   }
 }
 /* cgpt-hide-disclaimer $ Hides the "I know ChatGPT can make mistakes" hint */
-[data-testid="thread-disclaimer"] {
+[data-testid="thread-disclaimer"],
+div[class*="disclaimer"],
+#thread-bottom-container div:has(> a[href*="openai.com"]),
+#thread-bottom-container div[class*="text-xs"],
+#thread-bottom-container [class*="text-token-text-secondary"][class*="text-xs"],
+div[class*="text-xs text-center"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
 
 /* cgpt-hide-top-buttons $ Hides all action buttons at the top header while preserving breathing space */
@@ -1137,4 +1149,89 @@ form[data-type="unified-composer"] button[aria-label*="Upgrade" i] {
 }
 
 
+/* cgpt-sidebar-rail-top $ Moves sidebar rail top buttons up to cover the space left by the absent logo */
+:root {
+  --sidebar-section-first-margin-top: 0px !important;
+}
 
+#stage-sidebar-tiny-bar,
+[data-testid="stage-sidebar-tiny-bar"],
+div[class*="sidebar-rail"],
+div[class*="w-(--sidebar-rail-width)"],
+*[class*="w-(--sidebar-rail-width)"] {
+  --sidebar-section-first-margin-top: 0px !important;
+  padding-top: 8px !important;
+  margin-top: 0 !important;
+}
+
+#stage-sidebar-tiny-bar > div:first-child,
+[data-testid="stage-sidebar-tiny-bar"] > div:first-child,
+div[class*="sidebar-rail"] > div:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+#stage-sidebar-tiny-bar header,
+#stage-sidebar-tiny-bar [class*="header"],
+#stage-sidebar-tiny-bar [class*="h-header-height"],
+#stage-sidebar-tiny-bar [class*="h-14"],
+#stage-sidebar-tiny-bar [class*="h-12"],
+#stage-sidebar-tiny-bar a[aria-label="Home"],
+#stage-sidebar-tiny-bar a[data-testid*="logo"],
+#stage-sidebar-tiny-bar button[data-testid="open-sidebar-button"],
+#stage-sidebar-tiny-bar button[aria-label*="sidebar" i],
+#stage-sidebar-tiny-bar > div:first-child > div:first-child:not(:has(button[aria-label*="Search" i])):not(:has(button[aria-label*="chat" i])):not(:has([data-sidebar-item])),
+[data-testid="stage-sidebar-tiny-bar"] header,
+[data-testid="stage-sidebar-tiny-bar"] [class*="header"],
+[data-testid="stage-sidebar-tiny-bar"] > div:first-child > div:first-child:not(:has(button[aria-label*="Search" i])):not(:has(button[aria-label*="chat" i])):not(:has([data-sidebar-item])),
+div[class*="sidebar-rail"] header,
+div[class*="sidebar-rail"] [class*="header"],
+div[class*="sidebar-rail"] > div:first-child > div:first-child:not(:has(button[aria-label*="Search" i])):not(:has(button[aria-label*="chat" i])):not(:has([data-sidebar-item])),
+#sidebar-header {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+div[class*="tall:sticky"][class*="top-header-height"],
+div[class*="pt-(--sidebar-section-first-margin-top)"][class*="tall:sticky"],
+div[class*="pt-(--sidebar-section-first-margin-top)"] {
+  top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#stage-sidebar-tiny-bar ul,
+#stage-sidebar-tiny-bar nav,
+#stage-sidebar-tiny-bar div:has(> button[aria-label*="Search" i]),
+#stage-sidebar-tiny-bar div:has(> [data-sidebar-item]),
+[data-testid="stage-sidebar-tiny-bar"] ul,
+[data-testid="stage-sidebar-tiny-bar"] div:has(> button[aria-label*="Search" i]),
+[data-testid="stage-sidebar-tiny-bar"] div:has(> [data-sidebar-item]),
+div[class*="sidebar-rail"] ul,
+div[class*="sidebar-rail"] div:has(> button[aria-label*="Search" i]),
+div[class*="sidebar-rail"] div:has(> [data-sidebar-item]) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+#stage-sidebar-tiny-bar button,
+#stage-sidebar-tiny-bar a,
+[data-testid="stage-sidebar-tiny-bar"] button,
+[data-testid="stage-sidebar-tiny-bar"] a,
+div[class*="sidebar-rail"] button,
+div[class*="sidebar-rail"] a {
+  margin-top: 0 !important;
+}
