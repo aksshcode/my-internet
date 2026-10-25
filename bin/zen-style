@@ -26,7 +26,6 @@ function build() {
   let userContent = "/* Zen Browser userContent.css auto-generated */\n";
   const customSites = [
     { file: "chatgpt.com.css", domains: ['domain("chatgpt.com")', 'domain("chat.openai.com")'] },
-    { file: "youtube.com.css", domains: ['domain("youtube.com")', 'domain("www.youtube.com")'] },
     { file: "music.youtube.com.css", domains: ['domain("music.youtube.com")'] }
   ];
   for (const site of customSites) {
