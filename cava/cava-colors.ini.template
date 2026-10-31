@@ -1,0 +1,17 @@
+[color]
+background = 'default'
+foreground = '{{colors.primary.default.hex}}'
+
+; Cava 1.0.0 requires a full 8-stop ramp when gradient = 1; fewer stops cause heap corruption
+; High-contrast, monotonic progression: Rich visible base -> Electric Primary -> Glowing Accent -> White peak
+gradient = 1
+gradient_color_1 = '{{colors.primary_container.default.hex}}'
+gradient_color_2 = '{{colors.inverse_primary.default.hex}}'
+gradient_color_3 = '{{colors.source_color.default.hex}}'
+gradient_color_4 = '{{colors.secondary.default.hex}}'
+gradient_color_5 = '{{colors.primary.default.hex}}'
+gradient_color_6 = '{{colors.tertiary.default.hex}}'
+gradient_color_7 = '{{colors.on_tertiary_container.default.hex}}'
+gradient_color_8 = '#ffffff'
+
+horizontal_gradient = 0
